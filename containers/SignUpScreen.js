@@ -79,6 +79,14 @@ export default function SignUpScreen({ setToken, navigation }) {
         </View>
       )}
 
+      {fieldEmpty && <Text style={styles.error}>Please fill all fields </Text>}
+
+      {errorPassword && (
+        <Text style={styles.error}>Password and confirm must be the same </Text>
+      )}
+
+      {signUpError && <Text style={styles.error}>{signUpError}</Text>}
+
       <View>
         <TextInput
           keyboardType="email-address"
@@ -172,18 +180,6 @@ export default function SignUpScreen({ setToken, navigation }) {
             />
           </View>
         )}
-
-        {fieldEmpty && (
-          <Text style={styles.error}>Please fill all fields </Text>
-        )}
-
-        {errorPassword && (
-          <Text style={styles.error}>
-            Password and confirm must be the same{" "}
-          </Text>
-        )}
-
-        {signUpError && <Text style={styles.error}>{signUpError}</Text>}
 
         <TouchableOpacity
           style={{ alignItems: "center" }}

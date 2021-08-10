@@ -83,6 +83,12 @@ export default function SignInScreen({ setToken }) {
         </View>
       )}
 
+      {fieldEmpty && <Text style={styles.error}>Please fill all fields </Text>}
+
+      {errorPassword && <Text style={styles.error}>Wrong password </Text>}
+
+      {signInError && <Text style={styles.error}>{signInError}</Text>}
+
       <View>
         <TextInput
           keyboardType="email-address"
@@ -127,14 +133,6 @@ export default function SignInScreen({ setToken }) {
             />
           </View>
         )}
-
-        {fieldEmpty && (
-          <Text style={styles.error}>Please fill all fields </Text>
-        )}
-
-        {errorPassword && <Text style={styles.error}>Wrong password </Text>}
-
-        {signInError && <Text style={styles.error}>{signInError}</Text>}
 
         <TouchableOpacity
           style={{ alignItems: "center" }}
