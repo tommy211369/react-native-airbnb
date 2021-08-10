@@ -65,23 +65,21 @@ export default function SignInScreen({ setToken }) {
   };
 
   const navigation = useNavigation();
-  return (
+  return isLoading ? (
+    <View style={styles.loading}>
+      <ActivityIndicator size="large" color="#E5A2A2" />
+    </View>
+  ) : (
     <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}
       style={{ marginHorizontal: 35, marginVertical: 20 }}
     >
-      {isLoading ? (
-        <View style={styles.loading}>
-          <ActivityIndicator size="large" color="#E5A2A2" />
+      <View>
+        <View style={{ alignItems: "center" }}>
+          <Image source={logo} style={styles.logo} />
         </View>
-      ) : (
-        <View>
-          <View style={{ alignItems: "center" }}>
-            <Image source={logo} style={styles.logo} />
-          </View>
-          <Text style={styles.title}>Sign In</Text>
-        </View>
-      )}
+        <Text style={styles.title}>Sign In</Text>
+      </View>
 
       {fieldEmpty && <Text style={styles.error}>Please fill all fields </Text>}
 
@@ -167,6 +165,11 @@ export default function SignInScreen({ setToken }) {
 }
 
 const styles = StyleSheet.create({
+  loading: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   logo: {
     width: 150,
     height: 150,
