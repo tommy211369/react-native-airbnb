@@ -46,7 +46,7 @@ export default function App() {
     <NavigationContainer>
       {isLoading ? null : userToken === null ? ( // We haven't finished checking for the token yet
         // No token found, user isn't signed in
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="SignIn">
             {(props) => <SignInScreen {...props} setToken={setToken} />}
           </Stack.Screen>
@@ -56,7 +56,7 @@ export default function App() {
         </Stack.Navigator>
       ) : (
         // User is signed in
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Tab" options={{ headerShown: false }}>
             {() => (
               <Tab.Navigator

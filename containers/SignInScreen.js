@@ -75,7 +75,7 @@ export default function SignInScreen({ setToken }) {
       style={{ marginHorizontal: 35, marginVertical: 20 }}
     >
       <View>
-        <View style={{ alignItems: "center" }}>
+        <View style={{ alignItems: "center", marginTop: 50 }}>
           <Image source={logo} style={styles.logo} />
         </View>
         <Text style={styles.title}>Sign In</Text>
