@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/core";
 import logo from "../assets/img/logo-airbnb.png";
 import axios from "axios";
+import { AntDesign } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
 import {
   Button,
@@ -25,6 +27,7 @@ export default function SignInScreen({ setToken }) {
   const [signInError, setSignInError] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [seePass, setSeePass] = useState(true);
 
   const userData = {
     email: email,
@@ -94,12 +97,36 @@ export default function SignInScreen({ setToken }) {
         <TextInput
           placeholder="Password"
           value={password}
-          secureTextEntry={true}
+          secureTextEntry={seePass}
           style={styles.input}
           onChangeText={(text) => {
             setPassword(text);
           }}
         />
+
+        {seePass ? (
+          <View style={styles.eye}>
+            <AntDesign
+              name="eye"
+              size={24}
+              color="#606060"
+              onPress={() => {
+                setSeePass(false);
+              }}
+            />
+          </View>
+        ) : (
+          <View style={styles.eye}>
+            <Entypo
+              name="eye-with-line"
+              size={24}
+              color="#606060"
+              onPress={() => {
+                setSeePass(true);
+              }}
+            />
+          </View>
+        )}
 
         {fieldEmpty && (
           <Text style={styles.error}>Please fill all fields </Text>
@@ -133,7 +160,7 @@ export default function SignInScreen({ setToken }) {
               navigation.navigate("SignUp");
             }}
           >
-            Doesn't have an account yet ? Sign Up
+            No account ? Register
           </Text>
         </TouchableOpacity>
       </View>
@@ -187,5 +214,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "red",
     marginBottom: 10,
+  },
+  eye: {
+    width: 25,
+    position: "absolute",
+    bottom: Platform.OS === "android" ? 130 : 125,
+    right: 0,
   },
 });

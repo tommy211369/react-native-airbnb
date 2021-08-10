@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import logo from "../assets/img/logo-airbnb.png";
 import axios from "axios";
+import { AntDesign } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import {
   Button,
   Text,
@@ -25,6 +27,8 @@ export default function SignUpScreen({ setToken, navigation }) {
   const [signUpError, setSignUpError] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [seePass, setSeePass] = useState(true);
+  const [seePassConfirm, setSeePassConfirm] = useState(true);
 
   const userData = {
     email: email,
@@ -104,21 +108,71 @@ export default function SignUpScreen({ setToken, navigation }) {
         <TextInput
           placeholder="Password"
           value={password}
-          secureTextEntry={true}
+          secureTextEntry={seePass}
           style={styles.input}
           onChangeText={(text) => {
             setPassword(text);
           }}
         />
+
+        {seePass ? (
+          <View style={styles.eye}>
+            <AntDesign
+              name="eye"
+              size={24}
+              color="#606060"
+              onPress={() => {
+                setSeePass(false);
+              }}
+            />
+          </View>
+        ) : (
+          <View style={styles.eye}>
+            <Entypo
+              name="eye-with-line"
+              size={24}
+              color="#606060"
+              onPress={() => {
+                setSeePass(true);
+              }}
+            />
+          </View>
+        )}
+
         <TextInput
           placeholder="Confirm Password"
           value={confirmPassword}
-          secureTextEntry={true}
+          secureTextEntry={seePassConfirm}
           style={styles.input}
           onChangeText={(text) => {
             setConfirmPassword(text);
           }}
         />
+
+        {seePassConfirm ? (
+          <View style={styles.eyeConfirm}>
+            <AntDesign
+              name="eye"
+              size={24}
+              color="#606060"
+              onPress={() => {
+                setSeePassConfirm(false);
+              }}
+            />
+          </View>
+        ) : (
+          <View style={styles.eyeConfirm}>
+            <Entypo
+              name="eye-with-line"
+              size={24}
+              color="#606060"
+              onPress={() => {
+                setSeePassConfirm(true);
+              }}
+            />
+          </View>
+        )}
+
         {fieldEmpty && (
           <Text style={styles.error}>Please fill all fields </Text>
         )}
@@ -221,5 +275,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "red",
     marginBottom: 10,
+  },
+  eye: {
+    width: 25,
+    position: "absolute",
+    bottom: Platform.OS === "android" ? 190 : 176,
+    right: 0,
+  },
+  eyeConfirm: {
+    width: 25,
+    position: "absolute",
+    bottom: Platform.OS === "android" ? 123 : 120,
+    right: 0,
   },
 });
