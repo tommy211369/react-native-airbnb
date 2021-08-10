@@ -1,6 +1,6 @@
 # react-native-airbnb
 
-A Airbnb app clone created with React Native
+Airbnb app clone created with React Native.  
 
 <li>Sign In : </li>
 
