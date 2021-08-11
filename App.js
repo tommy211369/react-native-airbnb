@@ -7,10 +7,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeScreen from "./containers/HomeScreen";
-import ProfileScreen from "./containers/ProfileScreen";
+import RoomScreen from "./containers/RoomScreen";
+import AroundMe from "./containers/AroundMe";
 import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
+import Logo from "./containers/components/Logo";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -60,7 +62,13 @@ export default function App() {
         </Stack.Navigator>
       ) : (
         // User is signed in
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator
+          screenOptions={
+            {
+              // headerMode: false,
+            }
+          }
+        >
           <Stack.Screen name="Tab" options={{ headerShown: false }}>
             {() => (
               <Tab.Navigator
@@ -81,23 +89,34 @@ export default function App() {
                 >
                   {() => (
                     <Stack.Navigator>
-                      <Stack.Screen name="Home">
+                      <Stack.Screen
+                        name="Home"
+                        options={{
+                          headerTitle: () => <Logo />,
+                          headerStyle: {
+                            height: 80,
+                          },
+                        }}
+                      >
                         {() => <HomeScreen />}
                       </Stack.Screen>
 
                       <Stack.Screen
-                        name="Profile"
+                        name="Room"
                         options={{
-                          title: "User Profile",
+                          headerTitle: () => <Logo />,
+                          headerStyle: {
+                            height: 80,
+                          },
                         }}
                       >
-                        {() => <ProfileScreen />}
+                        {() => <RoomScreen />}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}
                 </Tab.Screen>
                 <Tab.Screen
-                  name="Room"
+                  name="Around me"
                   options={{
                     tabBarLabel: "Around me",
                     tabBarIcon: ({ color, size }) => (
@@ -112,29 +131,21 @@ export default function App() {
                   {() => (
                     <Stack.Navigator>
                       <Stack.Screen
-                        name="Room"
+                        name="Around me"
                         options={{
-                          title: "My App",
-                          headerStyle: { backgroundColor: "red" },
-                          headerTitleStyle: { color: "white" },
+                          headerTitle: () => <Logo />,
+                          headerStyle: {
+                            height: 80,
+                          },
                         }}
                       >
-                        {() => <HomeScreen />}
-                      </Stack.Screen>
-
-                      <Stack.Screen
-                        name="Profile"
-                        options={{
-                          title: "User Profile",
-                        }}
-                      >
-                        {() => <ProfileScreen />}
+                        {() => <AroundMe />}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}
                 </Tab.Screen>
                 <Tab.Screen
-                  name="Settings"
+                  name="Profile"
                   options={{
                     tabBarLabel: "My profile",
                     tabBarIcon: ({ color, size }) => (
@@ -146,7 +157,12 @@ export default function App() {
                     <Stack.Navigator>
                       <Stack.Screen
                         name="Settings"
-                        options={{ title: "Settings", tabBarLabel: "Settings" }}
+                        options={{
+                          headerTitle: () => <Logo />,
+                          headerStyle: {
+                            height: 80,
+                          },
+                        }}
                       >
                         {() => <SettingsScreen setToken={setToken} />}
                       </Stack.Screen>

@@ -9,12 +9,14 @@ import {
   ScrollView,
   ActivityIndicator,
   StyleSheet,
+  FlatList,
+  TouchableOpacity,
 } from "react-native";
 import axios from "axios";
 
 export default function HomeScreen() {
   const [rooms, setRooms] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,34 +40,11 @@ export default function HomeScreen() {
     </View>
   ) : (
     <View>
-      <View style={{ alignItems: "center", marginTop: 10 }}>
-        <Image source={logo} style={styles.logo} />
-      </View>
-
-      <ScrollView style={{ paddingHorizontal: 10 }}>
-        {rooms.map((room) => {
-          return (
-            <View key={room._id} style={styles.room}>
-              <Image style={styles.image} /> {/* room.photos[0].url */}
-              <Text>Price : {/* room.price  absolute */}</Text>
-              <View style={{ flexDirection: "row" }}>
-                <View>
-                  <Text>Titre : {/* room.title */}</Text>
-                  <Text>Rating : {/* room.ratingValue */}</Text>
-                </View>
-                <Image style={styles.userPicture} />{" "}
-                {/* room.user.account.photo.url */}
-              </View>
-              <Button
-                title="Go to Profile"
-                onPress={() => {
-                  navigation.navigate("Profile", { userId: 123 });
-                }}
-              />
-            </View>
-          );
-        })}
-      </ScrollView>
+      <Text>Home</Text>
+      <Button
+        title="To Room Screen"
+        onPress={() => navigation.navigate("Room")}
+      ></Button>
     </View>
   );
 }
