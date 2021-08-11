@@ -3,7 +3,7 @@ import { Entypo } from "@expo/vector-icons";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
 import LottieView from "lottie-react-native";
 import { AntDesign } from "@expo/vector-icons";
-
+import ShowLineButton from "../containers/components/ShowLineButton";
 import {
   Button,
   Text,
@@ -69,6 +69,7 @@ export default function RoomScreen({ navigation, route }) {
           <Text style={{ color: "white" }}>{room.price} €</Text>
         </View>
       </View>
+
       <View style={{ paddingHorizontal: 15 }}>
         <View
           style={{
@@ -80,17 +81,13 @@ export default function RoomScreen({ navigation, route }) {
             <Text numberOfLines={1} style={styles.title}>
               {room.title}
             </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 15,
-              }}
-            >
+            <View style={styles.rates}>
               <Text style={styles.rating}>
                 {stars.map((star, index) => {
                   return <Text key={index}>{star}</Text>;
                 })}
               </Text>
+
               <Text style={styles.reviews}>{room.reviews} reviews</Text>
             </View>
           </View>
@@ -110,33 +107,12 @@ export default function RoomScreen({ navigation, route }) {
           </Text>
         )}
 
-        <TouchableOpacity
-          onPress={() => {
-            setShowLines(!showLines);
-
-            if (showLines) {
-              setShow("show less");
-            } else {
-              setShow("show more");
-            }
-          }}
-        >
-          {showLines && (
-            <Text
-              style={{ color: "#C4C4C4", marginTop: 10, fontWeight: "bold" }}
-            >
-              {show} <AntDesign name="caretdown" size={12} color="#C4C4C4" />
-            </Text>
-          )}
-
-          {!showLines && (
-            <Text
-              style={{ color: "#C4C4C4", marginTop: 10, fontWeight: "bold" }}
-            >
-              {show} <AntDesign name="caretup" size={12} color="#C4C4C4" />
-            </Text>
-          )}
-        </TouchableOpacity>
+        <ShowLineButton
+          showLines={showLines}
+          setShowLines={setShowLines}
+          show={show}
+          setShow={setShow}
+        />
       </View>
     </ScrollView>
   );
@@ -167,6 +143,10 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 18,
+  },
+  rates: {
+    flexDirection: "row",
+    marginTop: 15,
   },
   rating: {
     marginRight: 10,
