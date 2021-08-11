@@ -80,7 +80,9 @@ export default function SignUpScreen({ setToken, navigation }) {
       {fieldEmpty && <Text style={styles.error}>Please fill all fields </Text>}
 
       {errorPassword && (
-        <Text style={styles.error}>Password and confirm must be the same </Text>
+        <Text style={styles.error}>
+          Password and confirmation are different{" "}
+        </Text>
       )}
 
       {signUpError && <Text style={styles.error}>{signUpError}</Text>}
