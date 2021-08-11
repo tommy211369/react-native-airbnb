@@ -99,7 +99,7 @@ export default function App() {
                           },
                         }}
                       >
-                        {() => <HomeScreen />}
+                        {(props) => <HomeScreen {...props} />}
                       </Stack.Screen>
 
                       <Stack.Screen
@@ -112,7 +112,7 @@ export default function App() {
                           headerLeft: false,
                         }}
                       >
-                        {() => <RoomScreen />}
+                        {(props) => <RoomScreen {...props} />}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}
@@ -141,7 +141,7 @@ export default function App() {
                           },
                         }}
                       >
-                        {() => <AroundMe />}
+                        {(props) => <AroundMe {...props} />}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}
@@ -166,7 +166,9 @@ export default function App() {
                           },
                         }}
                       >
-                        {() => <SettingsScreen setToken={setToken} />}
+                        {(props) => (
+                          <SettingsScreen setToken={setToken} {...props} />
+                        )}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}
