@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Entypo } from "@expo/vector-icons";
 
 import {
   Button,
@@ -39,28 +40,50 @@ export default function HomeScreen({ navigation }) {
       <FlatList
         data={rooms}
         keyExtractor={(item) => item._id}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
-          console.log(item);
+          let stars = [];
+          for (let i = 0; i < Number(item.ratingValue); i++) {
+            stars.push(<Entypo name="star" size={17} color="#FBB102" />);
+          }
+
+          if (Number(item.ratingValue) === 4) {
+            stars.push(<Entypo name="star" size={17} color="#BBBBBB" />);
+          }
           return (
             <TouchableOpacity
               style={styles.room}
               onPress={() => navigation.navigate("Room", { id: item._id })}
             >
-              <Text>{item.price} €</Text>
+              <Image
+                style={styles.image}
+                source={{ uri: item.photos[0].url }}
+              />
+              <View style={styles.price}>
+                <Text style={{ color: "white" }}>{item.price} €</Text>
+              </View>
               <View
                 style={{
                   flexDirection: "row",
-                  width: "100%",
-                  backgroundColor: "red",
+                  marginTop: 10,
                 }}
               >
                 <View style={{ flex: 1 }}>
                   <Text numberOfLines={1} style={styles.title}>
                     {item.title}
                   </Text>
-                  <View style={{ flexDirection: "row" }}>
-                    <Text style={{ marginRight: 10 }}>{item.ratingValue}</Text>
-                    <Text>{item.reviews} reviews</Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      marginTop: 15,
+                    }}
+                  >
+                    <Text style={styles.rating}>
+                      {stars.map((star, index) => {
+                        return <Text>{star}</Text>;
+                      })}
+                    </Text>
+                    <Text style={styles.reviews}>{item.reviews} reviews</Text>
                   </View>
                 </View>
                 <Image
@@ -74,11 +97,6 @@ export default function HomeScreen({ navigation }) {
           );
         }}
       />
-
-      <Button
-        title="To Room Screen"
-        onPress={() => navigation.navigate("Room")}
-      ></Button>
     </View>
   );
 }
@@ -91,21 +109,34 @@ const styles = StyleSheet.create({
   },
   home: {
     paddingHorizontal: 10,
-    paddingVertical: 10,
     flex: 1,
   },
   room: {
     borderBottomColor: "#C4C4C4",
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     paddingVertical: 10,
   },
   image: {
     flex: 1,
-    height: 150,
+    height: 200,
+  },
+  price: {
+    position: "absolute",
+    backgroundColor: "black",
+    bottom: 100,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
   title: {
     fontWeight: "bold",
     fontSize: 18,
+  },
+  rating: {
+    marginRight: 10,
+  },
+  reviews: {
+    color: "#C4C4C4",
+    fontSize: 12,
   },
   userPicture: {
     width: 70,
