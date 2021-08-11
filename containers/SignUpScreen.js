@@ -3,9 +3,9 @@ import logo from "../assets/img/logo-airbnb.png";
 import axios from "axios";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import Input from "./components/Input";
-import ConnectionButton from "./components/ConnectionButton";
-import ToSignInScreen from "./components/ToSignInScreen";
+import Input from "../components/Input";
+import ConnectionButton from "../components/ConnectionButton";
+import ToSignInScreen from "../components/ToSignInScreen";
 import {
   Button,
   Text,

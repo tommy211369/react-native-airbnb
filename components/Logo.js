@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/img/logo-airbnb.png";
+import logo from "../assets/img/logo-airbnb.png";
 import { View, StyleSheet, Image } from "react-native";
 
 const Logo = () => {

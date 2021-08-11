@@ -13,8 +13,7 @@ import AroundMe from "./containers/AroundMe";
 import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
-import Logo from "./containers/components/Logo";
-import ArrowLeft from "./containers/components/ArrowLeft";
+import Logo from "./components/Logo";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();

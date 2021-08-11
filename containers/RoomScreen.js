@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Entypo } from "@expo/vector-icons";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
-import LottieView from "lottie-react-native";
-import { AntDesign } from "@expo/vector-icons";
-import ShowLineButton from "../containers/components/ShowLineButton";
+import ShowLineButton from "../components/ShowLineButton";
 import {
   Button,
   Text,
@@ -12,8 +10,6 @@ import {
   ScrollView,
   ActivityIndicator,
   StyleSheet,
-  FlatList,
-  TouchableOpacity,
   Dimensions,
 } from "react-native";
 import axios from "axios";

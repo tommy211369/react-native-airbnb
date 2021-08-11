@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Entypo } from "@expo/vector-icons";
-
+import LottieView from "lottie-react-native";
 import {
-  Button,
   Text,
   View,
   Image,
-  ScrollView,
-  ActivityIndicator,
   StyleSheet,
   FlatList,
   TouchableOpacity,
@@ -16,7 +13,7 @@ import axios from "axios";
 
 export default function HomeScreen({ navigation }) {
   const [rooms, setRooms] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,14 +23,19 @@ export default function HomeScreen({ navigation }) {
 
       // console.log("Rooms data : ", response.data);
       setRooms(response.data);
-      setIsLoading;
-      false;
+      setIsLoading(false);
     };
     fetchData();
   }, []);
+
   return isLoading ? (
-    <View style={styles.loading}>
-      <ActivityIndicator size="large" color="#E5A2A2" />
+    <View style={styles.lottie}>
+      <LottieView
+        autoPlay
+        loop
+        style={styles.heartLottie}
+        source={require("../assets/lottie/heart.json")}
+      />
     </View>
   ) : (
     <View style={styles.home}>
@@ -102,6 +104,15 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  lottie: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  heartLottie: {
+    width: 100,
+    height: 100,
+  },
   loading: {
     flex: 1,
     alignItems: "center",
