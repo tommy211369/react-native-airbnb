@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Entypo } from "@expo/vector-icons";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
 import LottieView from "lottie-react-native";
+import { AntDesign } from "@expo/vector-icons";
 
 import {
   Button,
@@ -120,9 +121,21 @@ export default function RoomScreen({ navigation, route }) {
             }
           }}
         >
-          <Text style={{ color: "#C4C4C4", marginTop: 10, fontWeight: "bold" }}>
-            {show}
-          </Text>
+          {showLines && (
+            <Text
+              style={{ color: "#C4C4C4", marginTop: 10, fontWeight: "bold" }}
+            >
+              {show} <AntDesign name="caretdown" size={12} color="#C4C4C4" />
+            </Text>
+          )}
+
+          {!showLines && (
+            <Text
+              style={{ color: "#C4C4C4", marginTop: 10, fontWeight: "bold" }}
+            >
+              {show} <AntDesign name="caretup" size={12} color="#C4C4C4" />
+            </Text>
+          )}
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -161,6 +174,7 @@ const styles = StyleSheet.create({
   reviews: {
     color: "#C4C4C4",
     fontSize: 12,
+    marginTop: 3,
   },
   userPicture: {
     width: 70,

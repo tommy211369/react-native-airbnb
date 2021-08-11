@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
   reviews: {
     color: "#C4C4C4",
     fontSize: 12,
+    marginTop: 3,
   },
   userPicture: {
     width: 70,
