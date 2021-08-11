@@ -22,7 +22,7 @@ const width = Dimensions.get("window").width;
 export default function RoomScreen({ navigation, route }) {
   const [room, setRoom] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [numberOfLines, setNumberOfLines] = useState(3);
+  const [show, setShow] = useState("show more");
   const [showLines, setShowLines] = useState(true);
 
   let stars = [];
@@ -98,19 +98,30 @@ export default function RoomScreen({ navigation, route }) {
             source={{ uri: room.user.account.photo.url }}
           />
         </View>
+
+        {showLines ? (
+          <Text style={styles.description} numberOfLines={3}>
+            {room.description}
+          </Text>
+        ) : (
+          <Text style={styles.description} numberOfLines={0}>
+            {room.description}
+          </Text>
+        )}
+
         <TouchableOpacity
           onPress={() => {
             setShowLines(!showLines);
 
             if (showLines) {
-              setNumberOfLines(0);
+              setShow("show less");
             } else {
-              setNumberOfLines(3);
+              setShow("show more");
             }
           }}
         >
-          <Text style={styles.description} numberOfLines={numberOfLines}>
-            {room.description}
+          <Text style={{ color: "#C4C4C4", marginTop: 10, fontWeight: "bold" }}>
+            {show}
           </Text>
         </TouchableOpacity>
       </View>
@@ -118,6 +129,11 @@ export default function RoomScreen({ navigation, route }) {
   );
 }
 const styles = StyleSheet.create({
+  loading: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   animationContainer: {
     backgroundColor: "#fff",
     alignItems: "center",
