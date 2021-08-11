@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Entypo } from "@expo/vector-icons";
+import { SwiperFlatList } from "react-native-swiper-flatlist";
 
 import {
   Button,
@@ -52,7 +53,17 @@ export default function RoomScreen({ navigation, route }) {
   ) : (
     <ScrollView>
       <View style={{ position: "relative" }}>
-        <FlatList
+        <SwiperFlatList
+          horizontal={true}
+          index={0}
+          showPagination
+          data={room.photos}
+          renderItem={({ item }) => (
+            <Image style={styles.image} source={{ uri: item.url }} />
+          )}
+        />
+
+        {/* <FlatList
           data={room.photos}
           horizontal={true}
           keyExtractor={(item) => item.picture_id}
@@ -60,7 +71,7 @@ export default function RoomScreen({ navigation, route }) {
           renderItem={({ item }) => {
             return <Image style={styles.image} source={{ uri: item.url }} />;
           }}
-        />
+        /> */}
         <View style={styles.price}>
           <Text style={{ color: "white" }}>{room.price} €</Text>
         </View>
