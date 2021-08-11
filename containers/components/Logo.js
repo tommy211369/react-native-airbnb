@@ -3,7 +3,15 @@ import logo from "../../assets/img/logo-airbnb.png";
 import { View, StyleSheet, Image } from "react-native";
 
 const Logo = () => {
-  return <Image source={logo} style={styles.logo} />;
+  return (
+    <View
+      style={{
+        alignItems: "center",
+      }}
+    >
+      <Image source={logo} style={styles.logo} />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

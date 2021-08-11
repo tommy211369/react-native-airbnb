@@ -39,8 +39,31 @@ export default function HomeScreen() {
       <ActivityIndicator size="large" color="#E5A2A2" />
     </View>
   ) : (
-    <View>
+    <View style={styles.home}>
       <Text>Home</Text>
+
+      <FlatList
+        data={rooms}
+        keyExtractor={(item) => item._id}
+        renderItem={({ item }) => {
+          console.log(item);
+          return (
+            <View onPress={() => navigation.navigate("Room", { id: item._id })}>
+              <Text>{item.price}</Text>
+              <View>
+                <View>
+                  <Text>{item.title}</Text>
+                  <View>
+                    <Text>{item.ratingValue}</Text>
+                    <Text>{item.reviews} reviews</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          );
+        }}
+      />
+
       <Button
         title="To Room Screen"
         onPress={() => navigation.navigate("Room")}
@@ -55,9 +78,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  logo: {
-    width: 50,
-    height: 50,
+  home: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   room: {
     borderBottomColor: "grey",

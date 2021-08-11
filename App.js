@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -94,7 +95,7 @@ export default function App() {
                         options={{
                           headerTitle: () => <Logo />,
                           headerStyle: {
-                            height: 80,
+                            height: Platform.OS === "android" ? 90 : 80,
                           },
                         }}
                       >
@@ -106,8 +107,9 @@ export default function App() {
                         options={{
                           headerTitle: () => <Logo />,
                           headerStyle: {
-                            height: 80,
+                            height: Platform.OS === "android" ? 90 : 80,
                           },
+                          headerLeft: false,
                         }}
                       >
                         {() => <RoomScreen />}
@@ -135,7 +137,7 @@ export default function App() {
                         options={{
                           headerTitle: () => <Logo />,
                           headerStyle: {
-                            height: 80,
+                            height: Platform.OS === "android" ? 90 : 80,
                           },
                         }}
                       >
@@ -160,7 +162,7 @@ export default function App() {
                         options={{
                           headerTitle: () => <Logo />,
                           headerStyle: {
-                            height: 80,
+                            height: Platform.OS === "android" ? 90 : 80,
                           },
                         }}
                       >
