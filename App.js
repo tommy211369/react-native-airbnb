@@ -14,6 +14,7 @@ import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
 import Logo from "./containers/components/Logo";
+import ArrowLeft from "./containers/components/ArrowLeft";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();

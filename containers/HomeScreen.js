@@ -80,7 +80,7 @@ export default function HomeScreen({ navigation }) {
                   >
                     <Text style={styles.rating}>
                       {stars.map((star, index) => {
-                        return <Text>{star}</Text>;
+                        return <Text key={index}>{star}</Text>;
                       })}
                     </Text>
                     <Text style={styles.reviews}>{item.reviews} reviews</Text>
