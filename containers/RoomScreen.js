@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Entypo } from "@expo/vector-icons";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
+import LottieView from "lottie-react-native";
 
 import {
   Button,
@@ -63,15 +64,6 @@ export default function RoomScreen({ navigation, route }) {
           )}
         />
 
-        {/* <FlatList
-          data={room.photos}
-          horizontal={true}
-          keyExtractor={(item) => item.picture_id}
-          showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => {
-            return <Image style={styles.image} source={{ uri: item.url }} />;
-          }}
-        /> */}
         <View style={styles.price}>
           <Text style={{ color: "white" }}>{room.price} €</Text>
         </View>
@@ -126,6 +118,12 @@ export default function RoomScreen({ navigation, route }) {
   );
 }
 const styles = StyleSheet.create({
+  animationContainer: {
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+  },
   image: {
     width: width,
     height: 280,

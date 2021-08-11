@@ -46,7 +46,6 @@ export default function SignInScreen({ setToken }) {
       console.log("Response data : ", response.data);
       setToken(response.data.token);
       setIsLoading(false);
-      alert("Log in successfully !");
     } catch (error) {
       setIsLoading(false);
       setFieldsEmpty(false);

@@ -52,7 +52,6 @@ export default function SignUpScreen({ setToken }) {
       console.log("Response data : ", response.data);
       setToken(response.data.token);
       setIsLoading(false);
-      alert("Log in successfully !");
     } catch (error) {
       if (error.response.status === 400) {
         setFieldsEmpty(false);
