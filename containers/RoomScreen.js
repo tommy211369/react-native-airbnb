@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   price: {
     position: "absolute",
     backgroundColor: "black",
-    bottom: 90,
+    bottom: 150,
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
