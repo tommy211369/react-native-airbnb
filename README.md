@@ -2,12 +2,9 @@
 
 Airbnb app clone created with React Native.  
 
-<li>Sign In : </li>
+<li>Sign In / Sign Up: </li>
 
 ![Capture d’écran 2021-08-11 à 09 04 43](https://user-images.githubusercontent.com/77752681/128985174-cb767132-34a1-462d-9095-08ab5a3d08a7.png)
-
-<li>Sign Up : </li>
-
 ![Capture d’écran 2021-08-11 à 09 05 02](https://user-images.githubusercontent.com/77752681/128985192-bb62d733-711f-475a-9e9f-490beb3a31b2.png)
 
 <li>Error messages : </li>
