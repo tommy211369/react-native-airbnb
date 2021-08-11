@@ -16,5 +16,8 @@ Airbnb app clone created with React Native.
 ![Capture d’écran 2021-08-11 à 09 06 04](https://user-images.githubusercontent.com/77752681/128985242-fc2b479e-f0de-4910-9314-f89bf22c6132.png)
 ![Capture d’écran 2021-08-11 à 09 09 21](https://user-images.githubusercontent.com/77752681/128985253-7034c05d-a58d-45d9-8045-278b875f15d1.png)
 
+<li>Looking for a stay ? : </li>
+
+![Capture d’écran 2021-08-11 à 14 51 15](https://user-images.githubusercontent.com/77752681/129031916-5bd46fe0-d6fd-489b-b13f-f1b839d6efd2.png)
 
 
