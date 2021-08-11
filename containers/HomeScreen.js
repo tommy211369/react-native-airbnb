@@ -17,14 +17,18 @@ export default function HomeScreen({ navigation }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(
-        "https://express-airbnb-api.herokuapp.com/rooms"
-      );
+      try {
+        const response = await axios.get(
+          "https://express-airbnb-api.herokuapp.com/rooms"
+        );
 
-      // console.log("Rooms data : ", response.data);
-      setRooms(response.data);
-      setIsLoading(false);
+        setRooms(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error.response);
+      }
     };
+
     fetchData();
   }, []);
 

@@ -132,7 +132,7 @@ export default function SignUpScreen({ setToken }) {
           keyboardType="default"
           placeholder="Password"
           setFunction={setPassword}
-          secure={true}
+          secure={seePass}
         />
 
         {seePass ? (
@@ -163,7 +163,7 @@ export default function SignUpScreen({ setToken }) {
           keyboardType="default"
           placeholder="Confirm Password"
           setFunction={setConfirmPassword}
-          secure={true}
+          secure={seePassConfirm}
         />
 
         {seePassConfirm ? (
