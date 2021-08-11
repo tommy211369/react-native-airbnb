@@ -3,6 +3,9 @@ import logo from "../assets/img/logo-airbnb.png";
 import axios from "axios";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import Input from "./components/Input";
+import ConnectionButton from "./components/ConnectionButton";
+import ToSignInScreen from "./components/ToSignInScreen";
 import {
   Button,
   Text,
@@ -16,7 +19,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-export default function SignUpScreen({ setToken, navigation }) {
+export default function SignUpScreen({ setToken }) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [description, setDescription] = useState("");
@@ -61,6 +64,21 @@ export default function SignUpScreen({ setToken, navigation }) {
     }
   };
 
+  const handleConnection = () => {
+    if (email && username && password && confirmPassword && description) {
+      if (password !== confirmPassword) {
+        setPasswordError(true);
+        setFieldsEmpty(false);
+      } else {
+        setIsLoading(true);
+        handleSubmit();
+      }
+    } else {
+      setFieldsEmpty(true);
+      setPasswordError(false);
+    }
+  };
+
   return isLoading ? (
     <View style={styles.loading}>
       <ActivityIndicator size="large" color="#E5A2A2" />
@@ -88,39 +106,34 @@ export default function SignUpScreen({ setToken, navigation }) {
       {signUpError && <Text style={styles.error}>{signUpError}</Text>}
 
       <View>
-        <TextInput
+        <Input
           keyboardType="email-address"
           placeholder="Email"
-          value={email}
-          style={styles.input}
-          onChangeText={(text) => {
-            setEmail(text);
-          }}
+          setFunction={setEmail}
+          secure={false}
         />
-        <TextInput
+
+        <Input
+          keyboardType="default"
           placeholder="Username"
-          value={username}
-          style={styles.input}
-          onChangeText={(text) => {
-            setUsername(text);
-          }}
+          setFunction={setUsername}
+          secure={false}
         />
+
         <TextInput
           multiline
+          textAlignVertical="top"
           style={styles.multiline}
-          value={description}
           onChangeText={(text) => {
             setDescription(text);
           }}
         />
-        <TextInput
+
+        <Input
+          keyboardType="default"
           placeholder="Password"
-          value={password}
-          secureTextEntry={seePass}
-          style={styles.input}
-          onChangeText={(text) => {
-            setPassword(text);
-          }}
+          setFunction={setPassword}
+          secure={true}
         />
 
         {seePass ? (
@@ -147,14 +160,11 @@ export default function SignUpScreen({ setToken, navigation }) {
           </View>
         )}
 
-        <TextInput
+        <Input
+          keyboardType="default"
           placeholder="Confirm Password"
-          value={confirmPassword}
-          secureTextEntry={seePassConfirm}
-          style={styles.input}
-          onChangeText={(text) => {
-            setConfirmPassword(text);
-          }}
+          setFunction={setConfirmPassword}
+          secure={true}
         />
 
         {seePassConfirm ? (
@@ -181,45 +191,11 @@ export default function SignUpScreen({ setToken, navigation }) {
           </View>
         )}
 
-        <TouchableOpacity
-          style={{ alignItems: "center" }}
-          onPress={async () => {
-            // const userToken = "secret-token";
-
-            if (
-              email &&
-              username &&
-              password &&
-              confirmPassword &&
-              description
-            ) {
-              if (password !== confirmPassword) {
-                setPasswordError(true);
-                setFieldsEmpty(false);
-              } else {
-                setIsLoading(true);
-                handleSubmit();
-              }
-            } else {
-              setFieldsEmpty(true);
-              setPasswordError(false);
-            }
-          }}
-        >
-          <Text style={styles.submit} disabled={disableSubmit}>
-            Sign Up
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text
-            style={styles.toSignIn}
-            onPress={() => {
-              navigation.navigate("SignIn");
-            }}
-          >
-            Already have an account ? Sign In
-          </Text>
-        </TouchableOpacity>
+        <ConnectionButton
+          handleConnection={handleConnection}
+          disableSubmit={disableSubmit}
+        />
+        <ToSignInScreen />
       </View>
     </KeyboardAwareScrollView>
   );
@@ -242,12 +218,6 @@ const styles = StyleSheet.create({
     color: "#7C7C7C",
     fontWeight: "bold",
   },
-  input: {
-    borderBottomColor: "#E5A2A2",
-    borderBottomWidth: 2,
-    paddingBottom: 7,
-    marginBottom: 30,
-  },
   multiline: {
     borderWidth: 2,
     borderColor: "#E5A2A2",
@@ -255,22 +225,6 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     marginBottom: 30,
     height: 100,
-  },
-  submit: {
-    borderWidth: 2,
-    borderColor: "#ED4E4E",
-    borderRadius: Platform.OS === "android" ? 50 : 25,
-    width: 140,
-    textAlign: "center",
-    padding: 15,
-    fontSize: 15,
-    color: "#7C7C7C",
-    fontWeight: "bold",
-  },
-  toSignIn: {
-    textAlign: "center",
-    marginTop: 20,
-    color: "#606060",
   },
   error: {
     textAlign: "center",

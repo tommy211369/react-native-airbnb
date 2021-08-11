@@ -4,6 +4,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeScreen from "./containers/HomeScreen";
 import ProfileScreen from "./containers/ProfileScreen";
 import SignInScreen from "./containers/SignInScreen";
@@ -15,7 +17,9 @@ const Stack = createStackNavigator();
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [userToken, setUserToken] = useState(null);
+  const [userToken, setUserToken] = useState(
+    AsyncStorage.getItem("userToken") || null
+  );
 
   const setToken = async (token) => {
     if (token) {
@@ -63,6 +67,7 @@ export default function App() {
                 tabBarOptions={{
                   activeTintColor: "tomato",
                   inactiveTintColor: "gray",
+                  style: { height: 70, paddingBottom: 10 },
                 }}
               >
                 <Tab.Screen
@@ -76,8 +81,38 @@ export default function App() {
                 >
                   {() => (
                     <Stack.Navigator>
+                      <Stack.Screen name="Home">
+                        {() => <HomeScreen />}
+                      </Stack.Screen>
+
                       <Stack.Screen
-                        name="Home"
+                        name="Profile"
+                        options={{
+                          title: "User Profile",
+                        }}
+                      >
+                        {() => <ProfileScreen />}
+                      </Stack.Screen>
+                    </Stack.Navigator>
+                  )}
+                </Tab.Screen>
+                <Tab.Screen
+                  name="Room"
+                  options={{
+                    tabBarLabel: "Around me",
+                    tabBarIcon: ({ color, size }) => (
+                      <MaterialCommunityIcons
+                        name="map-marker-outline"
+                        size={size}
+                        color={color}
+                      />
+                    ),
+                  }}
+                >
+                  {() => (
+                    <Stack.Navigator>
+                      <Stack.Screen
+                        name="Room"
                         options={{
                           title: "My App",
                           headerStyle: { backgroundColor: "red" },
@@ -101,13 +136,9 @@ export default function App() {
                 <Tab.Screen
                   name="Settings"
                   options={{
-                    tabBarLabel: "Settings",
+                    tabBarLabel: "My profile",
                     tabBarIcon: ({ color, size }) => (
-                      <Ionicons
-                        name={"ios-options"}
-                        size={size}
-                        color={color}
-                      />
+                      <AntDesign name="user" size={size} color={color} />
                     ),
                   }}
                 >
