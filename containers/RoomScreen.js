@@ -20,6 +20,8 @@ const width = Dimensions.get("window").width;
 export default function RoomScreen({ navigation, route }) {
   const [room, setRoom] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [numberOfLines, setNumberOfLines] = useState(3);
+  const [showLines, setShowLines] = useState(true);
 
   let stars = [];
   for (let i = 0; i < Number(room.ratingValue); i++) {
@@ -49,19 +51,20 @@ export default function RoomScreen({ navigation, route }) {
     </View>
   ) : (
     <ScrollView>
-      <FlatList
-        data={room.photos}
-        horizontal={true}
-        keyExtractor={(item) => item.picture_id}
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => {
-          return <Image style={styles.image} source={{ uri: item.url }} />;
-        }}
-      />
-      <View style={styles.price}>
-        <Text style={{ color: "white" }}>{room.price} €</Text>
+      <View style={{ position: "relative" }}>
+        <FlatList
+          data={room.photos}
+          horizontal={true}
+          keyExtractor={(item) => item.picture_id}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => {
+            return <Image style={styles.image} source={{ uri: item.url }} />;
+          }}
+        />
+        <View style={styles.price}>
+          <Text style={{ color: "white" }}>{room.price} €</Text>
+        </View>
       </View>
-
       <View style={{ paddingHorizontal: 15 }}>
         <View
           style={{
@@ -92,9 +95,21 @@ export default function RoomScreen({ navigation, route }) {
             source={{ uri: room.user.account.photo.url }}
           />
         </View>
-        <Text style={styles.description} numberOfLines={3}>
-          {room.description}
-        </Text>
+        <TouchableOpacity
+          onPress={() => {
+            setShowLines(!showLines);
+
+            if (showLines) {
+              setNumberOfLines(0);
+            } else {
+              setNumberOfLines(3);
+            }
+          }}
+        >
+          <Text style={styles.description} numberOfLines={numberOfLines}>
+            {room.description}
+          </Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -107,7 +122,7 @@ const styles = StyleSheet.create({
   price: {
     position: "absolute",
     backgroundColor: "black",
-    bottom: 150,
+    bottom: 10,
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
