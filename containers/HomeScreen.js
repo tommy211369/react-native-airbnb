@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import axios from "axios";
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, userToken }) {
   const [rooms, setRooms] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -30,7 +30,7 @@ export default function HomeScreen({ navigation }) {
     };
 
     fetchData();
-  }, []);
+  });
 
   return isLoading ? (
     <View style={styles.lottie}>
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   reviews: {
     color: "#C4C4C4",
     fontSize: 12,
-    marginTop: 3,
+    marginTop: 2,
   },
   userPicture: {
     width: 70,

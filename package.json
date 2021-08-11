@@ -26,7 +26,8 @@
     "react-native-screens": "~3.0.0",
     "react-native-swiper-flatlist": "^3.0.14",
     "react-native-web": "~0.13.12",
-    "lottie-react-native": "3.5.0"
+    "lottie-react-native": "3.5.0",
+    "react-native-maps": "0.27.1"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

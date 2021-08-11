@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Entypo } from "@expo/vector-icons";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
 import ShowLineButton from "../components/ShowLineButton";
+import MapView from "react-native-maps";
+
 import {
   Button,
   Text,
@@ -13,8 +15,6 @@ import {
   Dimensions,
 } from "react-native";
 import axios from "axios";
-
-const width = Dimensions.get("window").width;
 
 export default function RoomScreen({ navigation, route }) {
   const [room, setRoom] = useState("");
@@ -110,9 +110,15 @@ export default function RoomScreen({ navigation, route }) {
           setShow={setShow}
         />
       </View>
+
+      <View style={styles.mapContainer}>
+        <MapView style={styles.map} />
+      </View>
     </ScrollView>
   );
 }
+
+const width = Dimensions.get("window").width;
 const styles = StyleSheet.create({
   loading: {
     flex: 1,
@@ -159,5 +165,11 @@ const styles = StyleSheet.create({
   },
   description: {
     marginTop: 5,
+  },
+
+  map: {
+    marginTop: 20,
+    width: width,
+    height: 250,
   },
 });

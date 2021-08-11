@@ -43,7 +43,7 @@ export default function SignInScreen({ setToken }) {
         userData
       );
 
-      console.log("Response data : ", response.data);
+      // console.log("Response DATA : ", response.data);
       setToken(response.data.token);
       setIsLoading(false);
     } catch (error) {
