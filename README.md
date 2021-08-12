@@ -1,6 +1,6 @@
 # react-native-airbnb
 
-Airbnb app clone created with React Native.  
+A simple Airbnb app clone created with React Native.  
 
 <li>Sign In / Sign Up: </li>
 
@@ -16,5 +16,9 @@ Airbnb app clone created with React Native.
 <li>Looking for a stay ? : </li>
 
 ![Capture d’écran 2021-08-11 à 14 51 15](https://user-images.githubusercontent.com/77752681/129031916-5bd46fe0-d6fd-489b-b13f-f1b839d6efd2.png)
+
+<li>Rooms around your position : </li>
+
+<img width="347" alt="Capture d’écran 2021-08-12 à 12 25 07" src="https://user-images.githubusercontent.com/77752681/129181611-0bf7823f-31e0-459d-bd18-f40392e09997.png">
 
 
