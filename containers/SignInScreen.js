@@ -26,7 +26,6 @@ export default function SignInScreen({ setToken }) {
   const [fieldEmpty, setFieldsEmpty] = useState(false);
   const [signInError, setSignInError] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [seePass, setSeePass] = useState(true);
 
   const userData = {
@@ -45,9 +44,7 @@ export default function SignInScreen({ setToken }) {
 
       // console.log("Response DATA : ", response.data);
       setToken(response.data.token);
-      setIsLoading(false);
     } catch (error) {
-      setIsLoading(false);
       setFieldsEmpty(false);
       setErrorPassword(false);
 
@@ -64,11 +61,7 @@ export default function SignInScreen({ setToken }) {
   };
 
   const navigation = useNavigation();
-  return isLoading ? (
-    <View style={styles.loading}>
-      <ActivityIndicator size="large" color="#E5A2A2" />
-    </View>
-  ) : (
+  return (
     <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}
       style={{ marginHorizontal: 35, marginVertical: 20 }}

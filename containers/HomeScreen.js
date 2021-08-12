@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import axios from "axios";
 
-export default function HomeScreen({ navigation, userToken }) {
+export default function HomeScreen({ navigation }) {
   const [rooms, setRooms] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 

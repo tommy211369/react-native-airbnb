@@ -29,7 +29,6 @@ export default function SignUpScreen({ setToken }) {
   const [errorPassword, setPasswordError] = useState(false);
   const [signUpError, setSignUpError] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [seePass, setSeePass] = useState(true);
   const [seePassConfirm, setSeePassConfirm] = useState(true);
 
@@ -51,7 +50,6 @@ export default function SignUpScreen({ setToken }) {
 
       console.log("Response data : ", response.data);
       setToken(response.data.token);
-      setIsLoading(false);
     } catch (error) {
       if (error.response.status === 400) {
         setFieldsEmpty(false);
@@ -78,11 +76,7 @@ export default function SignUpScreen({ setToken }) {
     }
   };
 
-  return isLoading ? (
-    <View style={styles.loading}>
-      <ActivityIndicator size="large" color="#E5A2A2" />
-    </View>
-  ) : (
+  return (
     <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}
       style={{ marginHorizontal: 35, marginVertical: 20 }}
