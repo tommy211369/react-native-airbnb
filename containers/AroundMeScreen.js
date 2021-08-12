@@ -78,6 +78,7 @@ export default function AroundMeScreen({ navigation }) {
         initialRegion={{
           latitude: coords.latitude,
           longitude: coords.longitude,
+          latitudeDelta: 0.04,
           longitudeDelta: 0.05,
         }}
       >
