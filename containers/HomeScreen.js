@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Entypo } from "@expo/vector-icons";
 import LottieView from "lottie-react-native";
 import {

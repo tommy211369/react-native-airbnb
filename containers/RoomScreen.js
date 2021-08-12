@@ -3,7 +3,7 @@ import { Entypo } from "@expo/vector-icons";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
 import ShowLineButton from "../components/ShowLineButton";
 import MapView from "react-native-maps";
-
+import * as Location from "expo-location";
 import {
   Button,
   Text,
@@ -21,6 +21,8 @@ export default function RoomScreen({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const [show, setShow] = useState("show more");
   const [showLines, setShowLines] = useState(true);
+  const [coords, setCoords] = useState();
+  const [errorCoords, setErrorCoords] = useState();
 
   let stars = [];
   for (let i = 0; i < Number(room.ratingValue); i++) {
@@ -112,7 +114,23 @@ export default function RoomScreen({ navigation, route }) {
       </View>
 
       <View style={styles.mapContainer}>
-        <MapView style={styles.map} />
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: room.location[1],
+            longitude: room.location[0],
+            latitudeDelta: 0.04,
+            longitudeDelta: 0.05,
+          }}
+        >
+          <MapView.Marker
+            coordinate={{
+              latitude: room.location[1],
+              longitude: room.location[0],
+            }}
+            title={room.title}
+          />
+        </MapView>
       </View>
     </ScrollView>
   );
