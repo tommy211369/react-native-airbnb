@@ -53,9 +53,13 @@ export default function HomeScreen({ navigation, userToken }) {
             stars.push(<Entypo name="star" size={17} color="#FBB102" />);
           }
 
-          if (Number(item.ratingValue) === 4) {
+          for (let i = Number(item.ratingValue); i < 5; i++) {
             stars.push(<Entypo name="star" size={17} color="#BBBBBB" />);
           }
+
+          // if (Number(item.ratingValue) === 4) {
+          //   stars.push(<Entypo name="star" size={17} color="#BBBBBB" />);
+          // }
           return (
             <TouchableOpacity
               style={styles.room}

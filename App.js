@@ -99,9 +99,7 @@ export default function App() {
                           },
                         }}
                       >
-                        {(props) => (
-                          <HomeScreen {...props} userToken={userToken} />
-                        )}
+                        {(props) => <HomeScreen {...props} />}
                       </Stack.Screen>
 
                       <Stack.Screen
