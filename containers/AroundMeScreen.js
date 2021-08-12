@@ -103,15 +103,8 @@ export default function AroundMeScreen({ navigation }) {
           latitudeDelta: 0.04,
           longitudeDelta: 0.05,
         }}
+        showsUserLocation={true}
       >
-        <MapView.Marker
-          coordinate={{
-            latitude: coords.latitude,
-            longitude: coords.longitude,
-          }}
-          title="Your position"
-        />
-
         {around.map((room) => {
           return (
             <MapView.Marker
