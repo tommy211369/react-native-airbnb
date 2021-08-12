@@ -128,7 +128,6 @@ export default function SignInScreen({ setToken }) {
           style={{ alignItems: "center" }}
           onPress={async () => {
             if (email && password) {
-              setIsLoading(true);
               handleSubmit();
             } else {
               setFieldsEmpty(true);
