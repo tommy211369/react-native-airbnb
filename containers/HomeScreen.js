@@ -57,9 +57,6 @@ export default function HomeScreen({ navigation, userToken }) {
             stars.push(<Entypo name="star" size={17} color="#BBBBBB" />);
           }
 
-          // if (Number(item.ratingValue) === 4) {
-          //   stars.push(<Entypo name="star" size={17} color="#BBBBBB" />);
-          // }
           return (
             <TouchableOpacity
               style={styles.room}
