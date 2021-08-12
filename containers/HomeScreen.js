@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Entypo } from "@expo/vector-icons";
 import LottieView from "lottie-react-native";
 import {
@@ -38,7 +38,7 @@ export default function HomeScreen({ navigation, userToken }) {
         autoPlay
         loop
         style={styles.heartLottie}
-        source={require("../assets/lottie/heart.json")}
+        source={require("../assets/lottie/marker.json")}
       />
     </View>
   ) : (
