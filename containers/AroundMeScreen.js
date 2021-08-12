@@ -17,8 +17,6 @@ import axios from "axios";
 
 export default function AroundMeScreen({ navigation }) {
   const [around, setAround] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [coords, setCoords] = useState();
   const [errorCoords, setErrorCoords] = useState();
@@ -38,11 +36,8 @@ export default function AroundMeScreen({ navigation }) {
       } else {
         setErrorCoords(true);
       }
-
       setIsLoading(false);
     };
-
-    askPermission();
 
     const fetchData = async () => {
       try {
@@ -56,6 +51,8 @@ export default function AroundMeScreen({ navigation }) {
         console.log(error.response);
       }
     };
+
+    askPermission();
     fetchData();
   }, []);
 
