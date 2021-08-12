@@ -52,8 +52,8 @@ export default function AroundMeScreen({ navigation }) {
       }
     };
 
-    askPermission();
     fetchData();
+    askPermission();
   }, []);
 
   return isLoading ? (

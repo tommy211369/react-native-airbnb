@@ -16,6 +16,8 @@ export default function HomeScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    let isCancelled = false;
+
     const fetchData = async () => {
       try {
         const response = await axios.get(
@@ -23,14 +25,23 @@ export default function HomeScreen({ navigation }) {
         );
 
         // console.log("ROOMS DATA >>>> ", response.data)
-        setRooms(response.data);
-        setTimeout(() => setIsLoading(false), 3000);
+
+        if (!isCancelled) {
+          setRooms(response.data);
+          setTimeout(() => setIsLoading(false), 3000);
+        }
       } catch (error) {
-        console.log(error.response);
+        if (!isCancelled) {
+          console.log(error.response);
+        }
       }
     };
 
     fetchData();
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
   return isLoading ? (
