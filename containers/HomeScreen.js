@@ -23,7 +23,7 @@ export default function HomeScreen({ navigation, userToken }) {
         );
 
         setRooms(response.data);
-        setIsLoading(false);
+        setTimeout(() => setIsLoading(false), 3000);
       } catch (error) {
         console.log(error.response);
       }

@@ -20,24 +20,45 @@ export default function AroundMeScreen({ navigation }) {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [coords, setCoords] = useState();
+  const [errorCoords, setErrorCoords] = useState();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://express-airbnb-api.herokuapp.com/rooms/around"
-        );
+    const askPermission = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
 
-        console.log(response.data);
-        setAround(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error.response);
+      if (status === "granted") {
+        let location = await Location.getCurrentPositionAsync({});
+        console.log("location => ", location); //
+        const obj = {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        };
+        setCoords(obj);
+      } else {
+        setErrorCoords(true);
       }
+
+      setIsLoading(false);
     };
 
-    fetchData();
-  });
+    askPermission();
+
+    //    const fetchData = async () => {
+    //      try {
+    //        const response = await axios.get(
+    //          "https://express-airbnb-api.herokuapp.com/rooms/around"
+    //        );
+
+    //        console.log(response.data);
+    //        setAround(response.data);
+    //      } catch (error) {
+    //        console.log(error.response);
+    //      }
+    //    };
+
+    // fetchData();
+  }, []);
 
   return isLoading ? (
     <View style={styles.lottie}>
@@ -48,24 +69,25 @@ export default function AroundMeScreen({ navigation }) {
         source={require("../assets/lottie/marker.json")}
       />
     </View>
+  ) : errorCoords ? (
+    <Text>Permission de géolocalisation refusée</Text>
   ) : (
     <View style={styles.around}>
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: 46.232192999999995,
-          longitude: 2.209666999999996,
-          latitudeDelta: 12,
-          longitudeDelta: 12,
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          longitudeDelta: 0.05,
         }}
       >
-        {/* <MapView.Marker
+        <MapView.Marker
           coordinate={{
-            latitude: room.location[1],
-            longitude: room.location[0],
+            latitude: coords.latitude,
+            longitude: coords.longitude,
           }}
-          title={room.title}
-        />*/}
+          title="Votre position"
+        />
       </MapView>
     </View>
   );

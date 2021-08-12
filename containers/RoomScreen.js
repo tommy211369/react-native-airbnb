@@ -21,8 +21,6 @@ export default function RoomScreen({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const [show, setShow] = useState("show more");
   const [showLines, setShowLines] = useState(true);
-  const [coords, setCoords] = useState();
-  const [errorCoords, setErrorCoords] = useState();
 
   let stars = [];
   for (let i = 0; i < Number(room.ratingValue); i++) {
