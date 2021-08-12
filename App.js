@@ -9,7 +9,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeScreen from "./containers/HomeScreen";
 import RoomScreen from "./containers/RoomScreen";
-import AroundMe from "./containers/AroundMe";
+import AroundMeScreen from "./containers/AroundMeScreen";
 import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
@@ -141,7 +141,7 @@ export default function App() {
                           },
                         }}
                       >
-                        {(props) => <AroundMe {...props} />}
+                        {(props) => <AroundMeScreen {...props} />}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}
