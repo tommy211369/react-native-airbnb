@@ -19,6 +19,7 @@ A simple Airbnb app clone created with React Native.
 
 <li>Rooms around your position : </li>
 
-<img width="347" alt="Capture d’écran 2021-08-12 à 12 25 07" src="https://user-images.githubusercontent.com/77752681/129181611-0bf7823f-31e0-459d-bd18-f40392e09997.png">
+<img width="350" alt="Capture d’écran 2021-08-12 à 12 36 53" src="https://user-images.githubusercontent.com/77752681/129183098-4e875e64-c20e-4946-8e4a-1aaf06682975.png">
+
 
 
