@@ -36,7 +36,7 @@ export default function AroundMeScreen({ navigation }) {
       } else {
         setErrorCoords(true);
       }
-      setIsLoading(false);
+      setTimeout(() => setIsLoading(false), 3000);
     };
 
     const fetchData = async () => {
