@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/core";
 import logo from "../assets/img/logo-airbnb.png";
 import axios from "axios";
 import { AntDesign } from "@expo/vector-icons";
@@ -18,7 +17,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-export default function SignInScreen({ setToken }) {
+export default function SignInScreen({ navigation, setToken }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState(false);
@@ -33,9 +32,9 @@ export default function SignInScreen({ setToken }) {
     password: password,
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     try {
-      setDisableSubmit(true);
+      // setDisableSubmit(true);
 
       const response = await axios.post(
         "https://express-airbnb-api.herokuapp.com/user/log_in",
@@ -43,6 +42,7 @@ export default function SignInScreen({ setToken }) {
       );
 
       // console.log("Response DATA : ", response.data);
+      // setDisableSubmit(false);
       setToken(response.data.token);
     } catch (error) {
       setFieldsEmpty(false);
@@ -50,9 +50,7 @@ export default function SignInScreen({ setToken }) {
 
       if (error.response.data.error === "Unauthorized") {
       }
-      setSignInError(
-        "Unauthorized : this account does not exist / wrong password"
-      );
+      setSignInError("This account does not exist / wrong password");
 
       console.log("Error : ", error.response);
       console.log("Response error status : ", error.response.status);
@@ -60,7 +58,6 @@ export default function SignInScreen({ setToken }) {
     }
   };
 
-  const navigation = useNavigation();
   return (
     <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}

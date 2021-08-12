@@ -67,7 +67,6 @@ export default function SignUpScreen({ setToken }) {
         setPasswordError(true);
         setFieldsEmpty(false);
       } else {
-        setIsLoading(true);
         handleSubmit();
       }
     } else {
