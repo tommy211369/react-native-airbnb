@@ -44,20 +44,17 @@ export default function AroundMeScreen({ navigation }) {
 
     askPermission();
 
-    //    const fetchData = async () => {
-    //      try {
-    //        const response = await axios.get(
-    //          "https://express-airbnb-api.herokuapp.com/rooms/around"
-    //        );
-
-    //        console.log(response.data);
-    //        setAround(response.data);
-    //      } catch (error) {
-    //        console.log(error.response);
-    //      }
-    //    };
-
-    // fetchData();
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://express-airbnb-api.herokuapp.com/rooms/around"
+        );
+        setAround(response.data);
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+    fetchData();
   }, []);
 
   return isLoading ? (
@@ -70,7 +67,30 @@ export default function AroundMeScreen({ navigation }) {
       />
     </View>
   ) : errorCoords ? (
-    <Text>Permission de géolocalisation refusée</Text>
+    <View style={styles.around}>
+      <MapView
+        style={styles.map}
+        initialRegion={{
+          latitude: 48.866667,
+          longitude: 2.333333,
+          latitudeDelta: 0.04,
+          longitudeDelta: 0.05,
+        }}
+      >
+        {around.map((roomLocation, index) => {
+          return (
+            <MapView.Marker
+              key={index}
+              coordinate={{
+                latitude: roomLocation.location[1],
+                longitude: roomLocation.location[0],
+              }}
+              title={roomLocation.title}
+            />
+          );
+        })}
+      </MapView>
+    </View>
   ) : (
     <View style={styles.around}>
       <MapView
@@ -87,8 +107,24 @@ export default function AroundMeScreen({ navigation }) {
             latitude: coords.latitude,
             longitude: coords.longitude,
           }}
-          title="Votre position"
+          title="Your position"
         />
+
+        {around.map((room) => {
+          return (
+            <MapView.Marker
+              key={room._id}
+              coordinate={{
+                latitude: room.location[1],
+                longitude: room.location[0],
+              }}
+              title={room.title}
+              onPress={() => {
+                navigation.navigate("Room", { id: room._id });
+              }}
+            />
+          );
+        })}
       </MapView>
     </View>
   );

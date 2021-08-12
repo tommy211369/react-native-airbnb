@@ -21,7 +21,6 @@ export default function HomeScreen({ navigation, userToken }) {
         const response = await axios.get(
           "https://express-airbnb-api.herokuapp.com/rooms"
         );
-
         setRooms(response.data);
         setTimeout(() => setIsLoading(false), 3000);
       } catch (error) {
@@ -30,7 +29,7 @@ export default function HomeScreen({ navigation, userToken }) {
     };
 
     fetchData();
-  });
+  }, []);
 
   return isLoading ? (
     <View style={styles.lottie}>
