@@ -32,6 +32,7 @@ export default function RoomScreen({ navigation, route }) {
   }
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
       const response = await axios.get(
         `https://express-airbnb-api.herokuapp.com/rooms/${route.params.id}`
