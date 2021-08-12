@@ -37,12 +37,12 @@ export default function RoomScreen({ navigation, route }) {
         `https://express-airbnb-api.herokuapp.com/rooms/${route.params.id}`
       );
 
-      console.log("Room data : ", response.data);
+      // console.log("Room data : ", response.data);
       setRoom(response.data);
       setIsLoading(false);
     };
     fetchData();
-  }, []);
+  }, [route.params.id]);
 
   return isLoading ? (
     <View style={styles.loading}>

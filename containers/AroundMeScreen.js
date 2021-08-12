@@ -49,6 +49,8 @@ export default function AroundMeScreen({ navigation }) {
         const response = await axios.get(
           "https://express-airbnb-api.herokuapp.com/rooms/around"
         );
+
+        console.log("AROUND ROOMS DATA >>>>> ", response.data);
         setAround(response.data);
       } catch (error) {
         console.log(error.response);
