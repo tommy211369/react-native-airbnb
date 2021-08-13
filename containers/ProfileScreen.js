@@ -15,7 +15,6 @@ import {
   TextInput,
 } from "react-native";
 import axios from "axios";
-import { getPermissionsAsync } from "expo-location";
 
 export default function ProfileScreen({ setToken, userId, userToken, setId }) {
   const [username, setUsername] = useState();
@@ -25,6 +24,7 @@ export default function ProfileScreen({ setToken, userId, userToken, setId }) {
   const [isLoading, setIsLoading] = useState(true);
   const [picture, setPicture] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [message, setMessage] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -109,9 +109,14 @@ export default function ProfileScreen({ setToken, userId, userToken, setId }) {
       );
 
       console.log(response.data);
+      setUploading(false);
+      setMessage("User picture updated !");
       // setPicture(response.data.photo);
     } catch (error) {
       console.log(error);
+      alert("Picture upload failed, sorry ...");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -137,6 +142,7 @@ export default function ProfileScreen({ setToken, userId, userToken, setId }) {
       );
 
       console.log("User infos update response >>>> ", response.data);
+      setMessage("User infos updated !");
     } catch (error) {
       console.log(error);
     }
@@ -187,7 +193,6 @@ export default function ProfileScreen({ setToken, userId, userToken, setId }) {
           </View>
         </View>
       </View>
-
       <TextInput
         value={!username ? userData.username : username}
         style={styles.input}
@@ -212,20 +217,37 @@ export default function ProfileScreen({ setToken, userId, userToken, setId }) {
         }}
       />
 
-      <TouchableOpacity
-        onPress={() => {
-          if (picture) {
-            sendPicture();
-          } else {
-            alert("Pas de photo");
-          }
-        }}
-        style={styles.update}
-      >
-        <Text style={{ color: "tomato", textAlign: "center" }}>
-          Update picture
+      {message && (
+        <Text
+          style={{ color: "tomato", textAlign: "center", marginBottom: 20 }}
+        >
+          {message}
         </Text>
-      </TouchableOpacity>
+      )}
+
+      {uploading ? (
+        <ActivityIndicator
+          size="large"
+          color="#E5A2A2"
+          style={{ marginBottom: 20 }}
+        />
+      ) : (
+        <TouchableOpacity
+          onPress={() => {
+            if (picture) {
+              setUploading(true);
+              sendPicture();
+            } else {
+              alert("Pas de changement photo");
+            }
+          }}
+          style={styles.update}
+        >
+          <Text style={{ color: "tomato", textAlign: "center" }}>
+            Update picture
+          </Text>
+        </TouchableOpacity>
+      )}
 
       <TouchableOpacity
         onPress={() => {
@@ -275,6 +297,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "tomato",
     paddingHorizontal: 10,
+    paddingBottom: 5,
   },
   largeInput: {
     marginVertical: 40,
