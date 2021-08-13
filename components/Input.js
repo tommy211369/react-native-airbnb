@@ -6,9 +6,11 @@ export default function Input({
   keyboardType,
   placeholder,
   secure,
+  value,
 }) {
   return (
     <TextInput
+      // value={}
       keyboardType={keyboardType}
       placeholder={placeholder}
       style={styles.input}
