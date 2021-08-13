@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "NavApp",
-    "slug": "NavApp",
+    "name": "Airbnb by Tommy",
+    "slug": "airbnb-by-Tommy",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -52,6 +52,7 @@ export default function ProfileScreen({ setToken, userId, userToken, setId }) {
     fetchData();
   }, []);
 
+  // PICTURE LIBRARY ACCESS
   const getPermissionsAndGetPicture = async () => {
     // demande permission accès à galerie photo
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -70,7 +71,7 @@ export default function ProfileScreen({ setToken, userId, userToken, setId }) {
     }
   };
 
-  // CAMERA
+  // CAMERA ACCESS
   const getPermissionsAndTakePicture = async () => {
     // demande permission accès à la caméra
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -112,8 +113,7 @@ export default function ProfileScreen({ setToken, userId, userToken, setId }) {
 
       console.log(response.data);
       setUploading(false);
-      setMessage("User picture updated !");
-      // setPicture(response.data.photo);
+      setMessage("Picture updated !");
     } catch (error) {
       console.log(error);
       alert("Picture upload failed, sorry ...");
@@ -144,7 +144,7 @@ export default function ProfileScreen({ setToken, userId, userToken, setId }) {
       );
 
       console.log("User infos update response >>>> ", response.data);
-      setMessage("User infos updated !");
+      setMessage("Infos updated !");
     } catch (error) {
       setMessage(error.response.data.error);
     }
