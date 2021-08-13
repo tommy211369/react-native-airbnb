@@ -41,7 +41,6 @@ export default function SignInScreen({ navigation, setToken, setId }) {
         userData
       );
 
-      console.log("Response DATA : ", response.data);
       setId(response.data.id);
       setToken(response.data.token);
     } catch (error) {

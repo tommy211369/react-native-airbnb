@@ -48,8 +48,7 @@ export default function SignUpScreen({ setToken, setId }) {
         userData
       );
 
-      console.log("Response data : ", response.data);
-      setId(response.data);
+      setId(response.data.id);
       setToken(response.data.token);
     } catch (error) {
       if (error.response.status === 400) {

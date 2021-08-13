@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import Input from "../components/Input";
+import ProfilePicture from "../components/ProfilePicture";
 import logo from "../assets/img/logo-airbnb.png";
 import {
   Text,
@@ -40,7 +40,9 @@ export default function ProfileScreen({ setToken, userId, userToken, setId }) {
 
         console.log("UserData Profile >>>> ", response.data);
         setUserData(response.data);
-        setPicture(response.data.photo[0].url);
+        {
+          response.data.photo && setPicture(response.data.photo[0].url);
+        }
         setIsLoading(false);
       } catch (error) {
         console.log(error.response);
@@ -144,7 +146,7 @@ export default function ProfileScreen({ setToken, userId, userToken, setId }) {
       console.log("User infos update response >>>> ", response.data);
       setMessage("User infos updated !");
     } catch (error) {
-      console.log(error);
+      setMessage(error.response.data.error);
     }
   };
 
@@ -154,45 +156,12 @@ export default function ProfileScreen({ setToken, userId, userToken, setId }) {
     </View>
   ) : (
     <ScrollView style={styles.profile}>
-      <View style={{ alignItems: "center" }}>
-        <View style={{ position: "relative" }}>
-          {picture ? (
-            <Image
-              source={{
-                uri: picture,
-              }}
-              style={[styles.picture, { height: 100, width: 100 }]}
-            />
-          ) : (
-            <AntDesign
-              name="user"
-              size={90}
-              color="black"
-              style={styles.picture}
-            />
-          )}
+      <ProfilePicture
+        picture={picture}
+        getPermissionsAndGetPicture={getPermissionsAndGetPicture}
+        getPermissionsAndTakePicture={getPermissionsAndTakePicture}
+      />
 
-          <View style={styles.addPicture}>
-            <TouchableOpacity>
-              <MaterialIcons
-                name="add-photo-alternate"
-                size={27}
-                color="grey"
-                onPress={() => {
-                  getPermissionsAndGetPicture();
-                }}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                getPermissionsAndTakePicture();
-              }}
-            >
-              <MaterialIcons name="add-a-photo" size={24} color="grey" />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
       <TextInput
         value={!username ? userData.username : username}
         style={styles.input}
@@ -287,11 +256,6 @@ const styles = StyleSheet.create({
     padding: 20,
     flex: 1,
   },
-  picture: {
-    borderRadius: 50,
-    borderWidth: 1,
-    padding: 3,
-  },
   input: {
     marginTop: 20,
     borderBottomWidth: 1,
@@ -305,13 +269,6 @@ const styles = StyleSheet.create({
     borderColor: "tomato",
     padding: 10,
     height: 100,
-  },
-  addPicture: {
-    position: "absolute",
-    right: -32,
-    top: 10,
-    height: 80,
-    justifyContent: "space-between",
   },
   logOutButton: {
     backgroundColor: "tomato",
