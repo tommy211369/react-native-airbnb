@@ -17,7 +17,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-export default function SignInScreen({ navigation, setToken }) {
+export default function SignInScreen({ navigation, setToken, setId }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState(false);
@@ -41,8 +41,8 @@ export default function SignInScreen({ navigation, setToken }) {
         userData
       );
 
-      // console.log("Response DATA : ", response.data);
-      // setDisableSubmit(false);
+      console.log("Response DATA : ", response.data);
+      setId(response.data.id);
       setToken(response.data.token);
     } catch (error) {
       setFieldsEmpty(false);

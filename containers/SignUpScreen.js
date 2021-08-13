@@ -19,7 +19,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-export default function SignUpScreen({ setToken }) {
+export default function SignUpScreen({ setToken, setId }) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [description, setDescription] = useState("");
@@ -49,6 +49,7 @@ export default function SignUpScreen({ setToken }) {
       );
 
       console.log("Response data : ", response.data);
+      setId(response.data);
       setToken(response.data.token);
     } catch (error) {
       if (error.response.status === 400) {
